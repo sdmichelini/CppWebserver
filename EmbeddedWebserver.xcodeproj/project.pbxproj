@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8208F3019F9B2F800995DB7 /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8208F2E19F9B2F800995DB7 /* server.cpp */; };
+		B8208F3319F9B66C00995DB7 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8208F3119F9B66C00995DB7 /* connection.cpp */; };
 		B861C75019DC515700056CD1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861C74F19DC515700056CD1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B8208F2E19F9B2F800995DB7 /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server.cpp; sourceTree = "<group>"; };
+		B8208F2F19F9B2F800995DB7 /* server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
+		B8208F3119F9B66C00995DB7 /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = connection.cpp; sourceTree = "<group>"; };
+		B8208F3219F9B66C00995DB7 /* connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection.h; sourceTree = "<group>"; };
 		B861C74C19DC515700056CD1 /* EmbeddedWebserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EmbeddedWebserver; sourceTree = BUILT_PRODUCTS_DIR; };
 		B861C74F19DC515700056CD1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				B861C74F19DC515700056CD1 /* main.cpp */,
+				B8208F2E19F9B2F800995DB7 /* server.cpp */,
+				B8208F2F19F9B2F800995DB7 /* server.h */,
+				B8208F3119F9B66C00995DB7 /* connection.cpp */,
+				B8208F3219F9B66C00995DB7 /* connection.h */,
 			);
 			path = EmbeddedWebserver;
 			sourceTree = "<group>";
@@ -118,7 +128,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8208F3019F9B2F800995DB7 /* server.cpp in Sources */,
 				B861C75019DC515700056CD1 /* main.cpp in Sources */,
+				B8208F3319F9B66C00995DB7 /* connection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +244,7 @@
 				B861C75519DC515700056CD1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
