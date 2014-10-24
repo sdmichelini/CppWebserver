@@ -8,6 +8,8 @@
 
 #include "connection.h"
 
+#define BUFFER_SIZE 1024
+
 connection::connection(unsigned short socket_fd)
 {
     this->m_socket_fd = socket_fd;
@@ -23,6 +25,23 @@ bool connection::write_string(std::string message)
 bool connection::write_bytes(void *bytes, unsigned short size)
 {
     return (send(this->m_socket_fd,bytes,size,0)==size);
+}
+
+std::string connection::recieve_string()
+{
+    char buf[BUFFER_SIZE];
+    size_t rc = recv(this->m_socket_fd,buf,BUFFER_SIZE,0);
+    if(rc<1)
+    {
+        std::cout<<"connection: Recieve Error"<<std::endl;
+        return "";
+    }
+    else
+    {
+        //Append NULL terminating character to string
+        buf[rc]=(char)NULL;
+        return std::string(buf);
+    }
 }
 
 void connection::close_socket()
