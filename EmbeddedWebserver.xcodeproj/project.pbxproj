@@ -11,6 +11,10 @@
 		B8208F3319F9B66C00995DB7 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8208F3119F9B66C00995DB7 /* connection.cpp */; };
 		B824A0EB1A23AE7600D406BE /* connection_queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B824A0E91A23AE7600D406BE /* connection_queue.cpp */; };
 		B824A0EF1A23B8AC00D406BE /* echo_processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B824A0ED1A23B8AC00D406BE /* echo_processor.cpp */; };
+		B83D2FA91A2CD71B001CFA7A /* html_page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83D2FA71A2CD71B001CFA7A /* html_page.cpp */; };
+		B83D2FAC1A2CDDFA001CFA7A /* css_page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83D2FAA1A2CDDFA001CFA7A /* css_page.cpp */; };
+		B83D2FB21A2CE18D001CFA7A /* server_variables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83D2FB01A2CE18D001CFA7A /* server_variables.cpp */; };
+		B83D2FB51A2CE75E001CFA7A /* custom_html.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83D2FB31A2CE75E001CFA7A /* custom_html.cpp */; };
 		B861C75019DC515700056CD1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861C74F19DC515700056CD1 /* main.cpp */; };
 		B8780EA01A2CBCC500F47CC4 /* http_request.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */; };
 		B8DE1CC01A251B8B0005E385 /* http_processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */; };
@@ -39,6 +43,14 @@
 		B824A0EC1A23B87100D406BE /* server_processor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = server_processor.h; sourceTree = "<group>"; };
 		B824A0ED1A23B8AC00D406BE /* echo_processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = echo_processor.cpp; sourceTree = "<group>"; };
 		B824A0EE1A23B8AC00D406BE /* echo_processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = echo_processor.h; sourceTree = "<group>"; };
+		B83D2FA71A2CD71B001CFA7A /* html_page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = html_page.cpp; sourceTree = "<group>"; };
+		B83D2FA81A2CD71B001CFA7A /* html_page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = html_page.h; sourceTree = "<group>"; };
+		B83D2FAA1A2CDDFA001CFA7A /* css_page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = css_page.cpp; sourceTree = "<group>"; };
+		B83D2FAB1A2CDDFA001CFA7A /* css_page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = css_page.h; sourceTree = "<group>"; };
+		B83D2FB01A2CE18D001CFA7A /* server_variables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_variables.cpp; sourceTree = "<group>"; };
+		B83D2FB11A2CE18D001CFA7A /* server_variables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server_variables.h; sourceTree = "<group>"; };
+		B83D2FB31A2CE75E001CFA7A /* custom_html.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = custom_html.cpp; sourceTree = "<group>"; };
+		B83D2FB41A2CE75E001CFA7A /* custom_html.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = custom_html.h; sourceTree = "<group>"; };
 		B861C74C19DC515700056CD1 /* EmbeddedWebserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EmbeddedWebserver; sourceTree = BUILT_PRODUCTS_DIR; };
 		B861C74F19DC515700056CD1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_request.cpp; sourceTree = "<group>"; };
@@ -60,10 +72,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B861C74319DC515700056CD1 = {
+		B83D2FAD1A2CE117001CFA7A /* http */ = {
+			isa = PBXGroup;
+			children = (
+				B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */,
+				B8DE1CBF1A251B8B0005E385 /* http_processor.h */,
+				B8DE1CC11A251F930005E385 /* http_response.cpp */,
+				B8DE1CC21A251F930005E385 /* http_response.h */,
+				B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */,
+				B8780E9F1A2CBCC500F47CC4 /* http_request.h */,
+			);
+			name = http;
+			sourceTree = "<group>";
+		};
+		B83D2FAE1A2CE138001CFA7A /* New Group */ = {
 			isa = PBXGroup;
 			children = (
 				B861C74E19DC515700056CD1 /* EmbeddedWebserver */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		B83D2FAF1A2CE15B001CFA7A /* html_base */ = {
+			isa = PBXGroup;
+			children = (
+				B83D2FA71A2CD71B001CFA7A /* html_page.cpp */,
+				B83D2FA81A2CD71B001CFA7A /* html_page.h */,
+				B83D2FAA1A2CDDFA001CFA7A /* css_page.cpp */,
+				B83D2FAB1A2CDDFA001CFA7A /* css_page.h */,
+				B83D2FB31A2CE75E001CFA7A /* custom_html.cpp */,
+				B83D2FB41A2CE75E001CFA7A /* custom_html.h */,
+			);
+			name = html_base;
+			sourceTree = "<group>";
+		};
+		B861C74319DC515700056CD1 = {
+			isa = PBXGroup;
+			children = (
+				B83D2FAE1A2CE138001CFA7A /* New Group */,
 				B861C74D19DC515700056CD1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,6 +125,8 @@
 		B861C74E19DC515700056CD1 /* EmbeddedWebserver */ = {
 			isa = PBXGroup;
 			children = (
+				B83D2FAF1A2CE15B001CFA7A /* html_base */,
+				B83D2FAD1A2CE117001CFA7A /* http */,
 				B861C74F19DC515700056CD1 /* main.cpp */,
 				B8208F2E19F9B2F800995DB7 /* server.cpp */,
 				B8208F2F19F9B2F800995DB7 /* server.h */,
@@ -89,12 +137,8 @@
 				B824A0EC1A23B87100D406BE /* server_processor.h */,
 				B824A0ED1A23B8AC00D406BE /* echo_processor.cpp */,
 				B824A0EE1A23B8AC00D406BE /* echo_processor.h */,
-				B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */,
-				B8DE1CBF1A251B8B0005E385 /* http_processor.h */,
-				B8DE1CC11A251F930005E385 /* http_response.cpp */,
-				B8DE1CC21A251F930005E385 /* http_response.h */,
-				B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */,
-				B8780E9F1A2CBCC500F47CC4 /* http_request.h */,
+				B83D2FB01A2CE18D001CFA7A /* server_variables.cpp */,
+				B83D2FB11A2CE18D001CFA7A /* server_variables.h */,
 			);
 			path = EmbeddedWebserver;
 			sourceTree = "<group>";
@@ -158,11 +202,15 @@
 				B8208F3019F9B2F800995DB7 /* server.cpp in Sources */,
 				B8780EA01A2CBCC500F47CC4 /* http_request.cpp in Sources */,
 				B8DE1CC31A251F930005E385 /* http_response.cpp in Sources */,
+				B83D2FB51A2CE75E001CFA7A /* custom_html.cpp in Sources */,
 				B824A0EB1A23AE7600D406BE /* connection_queue.cpp in Sources */,
+				B83D2FAC1A2CDDFA001CFA7A /* css_page.cpp in Sources */,
 				B861C75019DC515700056CD1 /* main.cpp in Sources */,
+				B83D2FB21A2CE18D001CFA7A /* server_variables.cpp in Sources */,
 				B8208F3319F9B66C00995DB7 /* connection.cpp in Sources */,
 				B8DE1CC01A251B8B0005E385 /* http_processor.cpp in Sources */,
 				B824A0EF1A23B8AC00D406BE /* echo_processor.cpp in Sources */,
+				B83D2FA91A2CD71B001CFA7A /* html_page.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,12 @@ http_request::http_request(std::string request){
 }
 
 void http_request::parse_request(){
+    if(m_request == ""){
+        return;
+    }
+    
+    std::cout<<m_request<<std::endl;
+    
     //The method will be from the beginning of the string to the first space
     size_t pos = m_request.find(' ');
     if(pos==std::string::npos){
