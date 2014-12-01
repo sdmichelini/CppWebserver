@@ -10,7 +10,7 @@
 
 #define BUFFER_SIZE 1024
 
-connection::connection(unsigned short socket_fd)
+connection::connection(int socket_fd)
 {
     this->m_socket_fd = socket_fd;
     //Assume Socket Opened already when making this class
@@ -48,6 +48,7 @@ void connection::close_socket()
 {
     if(this->m_open)
     {
+        std::cout<<"closed connection"<<std::endl;
         close(this->m_socket_fd);
     }
     this->m_open = false;

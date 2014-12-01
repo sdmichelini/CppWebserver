@@ -32,7 +32,7 @@ public:
      @param socket_fd
         BSD Socket File Descriptor
      */
-    connection(unsigned short socket_fd);
+    connection(int socket_fd);
     bool write_string(std::string message);
     /*!
      @function write_bytes
@@ -48,17 +48,18 @@ public:
     std::string recieve_string();
     void close_socket();
     void set_timeout(unsigned int millis);
+    
     bool is_closed()
     {
         return m_open;
     }
-    unsigned short get_raw_socket()
+    int get_raw_socket()
     {
         return m_socket_fd;
     }
     ~connection();
 private:
-    unsigned short m_socket_fd;
+    int m_socket_fd;
     bool m_open;
 };
 
