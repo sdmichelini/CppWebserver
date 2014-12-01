@@ -8,10 +8,12 @@
 
 #include "http_processor.h"
 #include "http_response.h"
+#include "http_request.h"
 
 
 void http_processor::process_client(connection *conn){
     std::string request = conn->recieve_string();
+    http_request req(request);
     http_response r;
     if(request.size()==0){
         std::cout<<"HTTP Request Error"<<std::endl;
@@ -25,7 +27,6 @@ void http_processor::process_client(connection *conn){
         r.set_status(200);
         r.set_header("Content-Type", "text/html");
         r.body = "<html><body>Good Response</body></html>";
-        std::cout<<r.to_string()<<std::endl;
         conn->write_string(r.to_string());
     }
 }

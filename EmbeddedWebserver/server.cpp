@@ -88,7 +88,6 @@ void server::acceptClients(server * s){
         if(remoteClientFd > 0){
             //Dispatch Client Thread
             s->m_queue->add_client(remoteClientFd);
-            std::cout<<"added clien to queue"<<std::endl;
         }
         //Sleep some
         usleep(500);

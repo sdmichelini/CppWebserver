@@ -46,7 +46,6 @@ void connection_queue::process_clients(){
             m_condition.wait(lock);
         }
         m_lock.unlock();
-        std::cout<<"Processing First Client on the Queue."<<std::endl;
         //Process the client here
         connection * conn = m_clients.front();
         processor->process_client(conn);

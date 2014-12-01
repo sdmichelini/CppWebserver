@@ -8,6 +8,7 @@
 
 #include "http_response.h"
 
+
 void http_response::set_header(std::string name,std::string value){
     for(unsigned int i = 0; i <m_headers.size(); i++){
         if(name == m_headers[i].name){
@@ -24,6 +25,7 @@ void http_response::set_header(std::string name,std::string value){
 std::string http_response::to_string(){
     //Set content length
     set_header("Content-Length", std::to_string(body.size()));
+    set_header("Connection", "close");
     //Make HTTP response
     //Status Line
     std::string ret = "HTTP/1.1 "+std::to_string(m_status)+" "+get_status_message(m_status)+"\r\n";
