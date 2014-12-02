@@ -13,17 +13,23 @@ server_variables::server_variables(){
 }
 
 void server_variables::add_variable(std::string name, std::string value){
+    m_lock.lock();
     m_values[name] = value;
+    m_lock.unlock();
 }
 
 void server_variables::add_float(std::string name, float value){
-    m_values[name] = std::to_string(value);
+    add_variable(name, std::to_string(value));
 }
 
 std::string server_variables::get_value(std::string name){
-    return m_values[name];
+    std::string temp;
+    m_lock.lock();
+    temp = m_values[name];
+    m_lock.unlock();
+    return temp;
 }
 
 bool server_variables::value_exists(std::string name){
-    return m_values[name]!="";
+    return get_value(name)!="";
 }

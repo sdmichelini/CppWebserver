@@ -14,13 +14,18 @@
 
 void http_processor::process_client(connection *conn){
     std::string request = conn->recieve_string();
+    
     if(request.size()==0){
        //do nothing except close connection
     }
     else{
         http_request req(request);
+        if(req.get_content_length() != req.get_body().size()){
+            req.set_body(conn->recieve_string());
+        }
+        
         http_response r;
-        if(req.get_path()=="var/"){
+        if(req.get_path()==VARIABLE_URL){
             r.set_status(200);
             r.body = "<html><head><title>Variables</title></head><body>This is where variables should be.</body></html>";
         }
@@ -38,7 +43,22 @@ void http_processor::process_client(connection *conn){
                 }
             }
         }
-        conn->write_string(r.to_string());
-        std::cout<<r.to_string()<<std::endl;
+        if(conn->bytes_available()){
+            std::cout<<"There is still data to read"<<std::endl;
+        }
+        std::string response = r.to_string();
+        size_t bytesSent;
+        //Iterator variable to see which chunk we are sending
+        unsigned int it = 0;
+        //Send in chunks
+        while(bytesSent != response.size()){
+            if(response.substr(it * MAX_PACKET_SIZE).size() < MAX_PACKET_SIZE){
+                bytesSent += conn->write_string(response.substr(it * MAX_PACKET_SIZE));
+                break;
+            }
+            else{
+                bytesSent += conn->write_string(response.substr(it * MAX_PACKET_SIZE,MAX_PACKET_SIZE));
+            }
+        }
     }
 }

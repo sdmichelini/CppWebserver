@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <map>
+#include <mutex>
 
 class server_variables{
 public:
@@ -24,13 +25,18 @@ public:
     bool value_exists(std::string name);
     
     std::map<std::string, std::string> get_values(){
-        return m_values;
+        std::map<std::string, std::string> ret;
+        m_lock.lock();
+        ret = m_values;
+        m_lock.unlock();
+        return ret;
     }
 private:
     server_variables();
     server_variables(server_variables const&);
     void operator=(server_variables const&);
     std::map<std::string, std::string> m_values;
+    std::mutex m_lock;
 };
 
 #endif /* defined(__EmbeddedWebserver__server_variables__) */

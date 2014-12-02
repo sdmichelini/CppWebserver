@@ -8,7 +8,7 @@
 
 #include "connection.h"
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 2048
 
 connection::connection(int socket_fd)
 {
@@ -40,7 +40,8 @@ std::string connection::recieve_string()
     {
         //Append NULL terminating character to string
         buf[rc]=(char)NULL;
-        return std::string(buf);
+        std::string ret = std::string(buf);
+        return ret;
     }
 }
 
@@ -52,6 +53,10 @@ void connection::close_socket()
         close(this->m_socket_fd);
     }
     this->m_open = false;
+}
+
+bool connection::bytes_available(){
+    return (recv(this->m_socket_fd, NULL,BUFFER_SIZE,MSG_PEEK|MSG_DONTWAIT) > 0);
 }
 
 void connection::set_timeout(unsigned int millis)

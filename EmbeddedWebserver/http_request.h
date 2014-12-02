@@ -57,6 +57,14 @@ public:
     std::vector<http_header> get_headers(){
         return m_headers;
     }
+    
+    unsigned int get_content_length(){
+        return m_contentLength;
+    }
+    
+    void set_body(std::string body){
+        m_body = body;
+    }
 private:
     ///Request in string form. Raw from packet
     std::string m_request;
@@ -74,6 +82,8 @@ private:
     const std::string HTTP_DELIM = "\r\n";
     ///Headers
     std::vector<http_header> m_headers;
+    ///Content-Length
+    unsigned int m_contentLength;
     
 };
 

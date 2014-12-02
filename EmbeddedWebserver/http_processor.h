@@ -11,10 +11,13 @@
 
 #include "server_processor.h"
 
+#define MAX_PACKET_SIZE 1024
+
 class http_processor:public server_processor{
 public:
     void process_client(connection * conn);
 private:
+    const std::string VARIABLE_URL = "var/";
 };
 
 #endif /* defined(__EmbeddedWebserver__http_processor__) */

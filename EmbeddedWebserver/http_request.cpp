@@ -16,6 +16,7 @@ http_request::http_request(std::string request){
     m_method = kUnsupported;
     m_path = "";
     m_body = "";
+    m_contentLength = 0;
     //Now parse the request
     parse_request();
 }
@@ -25,7 +26,7 @@ void http_request::parse_request(){
         return;
     }
     
-    std::cout<<m_request<<std::endl;
+    //std::cout<<m_request<<std::endl;
     
     //The method will be from the beginning of the string to the first space
     size_t pos = m_request.find(' ');
@@ -106,17 +107,27 @@ void http_request::parse_request(){
         std::string header_name = line.substr(0, colon_pos);
         std::string header_value = line.substr(colon_pos+1);
         http_header h;
+        if(header_name=="Content-Length"){
+            m_contentLength = std::stoi(header_value);
+        }
         h.name = header_name;
         h.value = header_value;
         m_headers.push_back(h);
         version_end = delim_loc;
 
     }
-    if(m_request.size() < delim_loc + 4){
+    
+    if(m_request.size() < (delim_loc + 2)){
+        if(m_method == kPost){
+            std::cout<<"Post is: "<<m_request.size()<<std::endl;
+        }
         return;
     }
-    m_body = m_request.substr(delim_loc + 4);
+    m_body = m_request.substr(delim_loc + 2);
     if(m_body.size() > 0){
        std::cout<<"Request Body: "<<m_body<<std::endl;
+    }
+    else{
+        if(m_method == kPost)std::cout<<"No Request Body."<<std::endl;
     }
 }

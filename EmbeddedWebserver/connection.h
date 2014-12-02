@@ -49,6 +49,8 @@ public:
     void close_socket();
     void set_timeout(unsigned int millis);
     
+    bool bytes_available();
+    
     bool is_closed()
     {
         return m_open;
