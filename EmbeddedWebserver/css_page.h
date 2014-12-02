@@ -19,6 +19,7 @@ public:
     bool is_valid(){
         return m_valid;
     }
+    const std::string CSS_PATH = "css_base/";
 private:
     bool m_valid;
 };

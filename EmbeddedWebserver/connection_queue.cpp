@@ -49,10 +49,13 @@ void connection_queue::process_clients(){
         //Process the client here
         connection * conn = m_clients.front();
         processor->process_client(conn);
-        m_lock.lock();
-        m_clients.pop_front();
-        delete conn;
-        m_lock.unlock();
+        if(!conn->keep_open())
+        {
+            m_lock.lock();
+            m_clients.pop_front();
+            delete conn;
+            m_lock.unlock();
+        }
     }
 }
 

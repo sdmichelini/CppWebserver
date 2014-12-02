@@ -9,6 +9,7 @@
 #include "http_processor.h"
 #include "html_page.h"
 #include "css_page.h"
+#include "js_page.h"
 #include "http_request.h"
 
 
@@ -31,12 +32,16 @@ void http_processor::process_client(connection *conn){
         }
         //Normal HTTP page
         else{
+            std::cout<<req.get_path()<<std::endl;
             size_t extension_loc = req.get_path().find_last_of('.');
             if(extension_loc != std::string::npos){
                 std::string extension = req.get_path().substr(extension_loc+1);
                 //Filter out CSS
                 if(extension == "css"){
                     r = css_page(req.get_path());
+                }
+                else if(extension == "js"){
+                    r = js_page(req.get_path());
                 }
                 else{
                     r = html_page(req.get_path());
@@ -47,7 +52,7 @@ void http_processor::process_client(connection *conn){
             std::cout<<"There is still data to read"<<std::endl;
         }
         std::string response = r.to_string();
-        size_t bytesSent;
+        size_t bytesSent = 0;
         //Iterator variable to see which chunk we are sending
         unsigned int it = 0;
         //Send in chunks
@@ -58,6 +63,7 @@ void http_processor::process_client(connection *conn){
             }
             else{
                 bytesSent += conn->write_string(response.substr(it * MAX_PACKET_SIZE,MAX_PACKET_SIZE));
+                it++;
             }
         }
     }

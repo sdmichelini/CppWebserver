@@ -15,16 +15,17 @@ connection::connection(int socket_fd)
     this->m_socket_fd = socket_fd;
     //Assume Socket Opened already when making this class
     this->m_open = true;
+    this->m_stay_open = false;
 }
 
-bool connection::write_string(std::string message)
+size_t connection::write_string(std::string message)
 {
     return write_bytes((void *)message.c_str(), message.size());
 }
 
-bool connection::write_bytes(void *bytes, unsigned short size)
+size_t connection::write_bytes(void *bytes, unsigned short size)
 {
-    return (send(this->m_socket_fd,bytes,size,0)==size);
+    return send(this->m_socket_fd,bytes,size,0);
 }
 
 std::string connection::recieve_string()

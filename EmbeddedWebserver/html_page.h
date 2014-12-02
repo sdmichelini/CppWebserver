@@ -19,6 +19,8 @@ public:
     bool is_valid(){
         return m_valid;
     }
+    ///Local path to HTML files
+    const std::string HTML_PATH = "html_base/";
 private:
     bool m_valid;
 };

@@ -33,7 +33,7 @@ public:
         BSD Socket File Descriptor
      */
     connection(int socket_fd);
-    bool write_string(std::string message);
+    size_t write_string(std::string message);
     /*!
      @function write_bytes
      @brief Write's Raw Bytes to a Socket
@@ -44,12 +44,24 @@ public:
      @return 
         True if all bytes are sent, false on error
      */
-    bool write_bytes(void * bytes, unsigned short size);
+    size_t write_bytes(void * bytes, unsigned short size);
     std::string recieve_string();
     void close_socket();
     void set_timeout(unsigned int millis);
     
     bool bytes_available();
+    
+    void stay_open(){
+        m_stay_open = true;
+    }
+    
+    void dont_stay_open(){
+        m_stay_open = false;
+    }
+    
+    bool keep_open(){
+        return m_stay_open;
+    }
     
     bool is_closed()
     {
@@ -63,6 +75,7 @@ public:
 private:
     int m_socket_fd;
     bool m_open;
+    bool m_stay_open;
 };
 
 #endif /* defined(__EmbeddedWebserver__connection__) */

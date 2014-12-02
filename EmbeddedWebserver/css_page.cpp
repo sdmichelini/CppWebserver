@@ -11,7 +11,7 @@
 css_page::css_page(std::string uri){
     std::ifstream file;
     
-    file.open("css_base/"+uri);
+    file.open(CSS_PATH+uri);
     
     if(!file.is_open()){
         std::cout<<"Error CSS: "<<uri<<" not found."<<std::endl;
@@ -22,7 +22,7 @@ css_page::css_page(std::string uri){
     std::string line;
     
     while(getline(file, line)){
-        this->body += line;
+        this->body += line + "\n";
     }
     
     file.close();

@@ -17,9 +17,12 @@ public:
     void add_head_line(std::string line);
     void add_css(std::string file);
     void add_div(std::string div_class, std::string content);
+    
+    void to_html();
 private:
-    std::string head;
-    std::string body;
+    std::string m_title;
+    std::string m_head;
+    std::string m_body;
     
 };
 
