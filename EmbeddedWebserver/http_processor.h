@@ -18,6 +18,7 @@ public:
     void process_client(connection * conn);
 private:
     const std::string VARIABLE_URL = "var/";
+    const std::string SSE_URL = "sse/";
 };
 
 #endif /* defined(__EmbeddedWebserver__http_processor__) */

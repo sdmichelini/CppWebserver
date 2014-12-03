@@ -23,7 +23,7 @@ struct http_response{
     void set_status(int status){
         m_status = status;
     }
-    std::string to_string();
+    virtual std::string to_string();
 private:
     std::vector<http_header> m_headers;
     static std::string get_status_message(int status);

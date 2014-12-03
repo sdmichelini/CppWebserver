@@ -30,6 +30,10 @@ void http_processor::process_client(connection *conn){
             r.set_status(200);
             r.body = "<html><head><title>Variables</title></head><body>This is where variables should be.</body></html>";
         }
+        else if(req.get_path()==SSE_URL){
+            r.set_status(200);
+            r.body = "<html><head><title>Server Sent Events</title></head><body>This is where server sent events should be.</body></html>";
+        }
         //Normal HTTP page
         else{
             std::cout<<req.get_path()<<std::endl;
