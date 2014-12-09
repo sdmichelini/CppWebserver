@@ -27,7 +27,10 @@ css_page::css_page(std::string uri){
     
     file.close();
     m_valid = true;
-    if(this->body.size()>0)this->set_status(200);
+    if(this->body.size()>0){
+        this->set_status(200);
+        this->set_header("Content-Type","text/css");
+    }
     else{
         this->set_status(404);
     }

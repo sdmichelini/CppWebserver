@@ -10,6 +10,7 @@
 #define __EmbeddedWebserver__custom_html__
 
 #include "http_response.h"
+#include <fstream>
 
 class custom_html:public http_response{
 public:
@@ -17,7 +18,8 @@ public:
     void add_head_line(std::string line);
     void add_css(std::string file);
     void add_div(std::string div_class, std::string content);
-    
+    void add_body(std::string bodyLine);
+    void render_template(std::string templateName);
     void to_html();
 private:
     std::string m_title;

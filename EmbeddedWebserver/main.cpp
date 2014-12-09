@@ -7,6 +7,7 @@
 //
 
 #include "server.h"
+#include "constants.h"
 #include <signal.h>
 
 
@@ -15,6 +16,8 @@ server * s;
 int main(int argc, const char * argv[]) {
     
     s = new server(10000);
+    constant::get_instance().add_constant("My Constant", "Test Value");
+    
     if(!s->begin()){
         std::cout<<"error"<<std::endl;
         return 1;

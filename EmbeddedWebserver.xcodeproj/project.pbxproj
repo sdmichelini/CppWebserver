@@ -17,6 +17,7 @@
 		B83D2FB51A2CE75E001CFA7A /* custom_html.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83D2FB31A2CE75E001CFA7A /* custom_html.cpp */; };
 		B861C75019DC515700056CD1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861C74F19DC515700056CD1 /* main.cpp */; };
 		B8780EA01A2CBCC500F47CC4 /* http_request.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */; };
+		B87FECF01A366DCD003C5F0E /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87FECEE1A366DCD003C5F0E /* constants.cpp */; };
 		B8B5F5B21A2E43F300A7666F /* js_page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B5F5B01A2E43F300A7666F /* js_page.cpp */; };
 		B8DE1CC01A251B8B0005E385 /* http_processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */; };
 		B8DE1CC31A251F930005E385 /* http_response.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8DE1CC11A251F930005E385 /* http_response.cpp */; };
@@ -56,6 +57,9 @@
 		B861C74F19DC515700056CD1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_request.cpp; sourceTree = "<group>"; };
 		B8780E9F1A2CBCC500F47CC4 /* http_request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_request.h; sourceTree = "<group>"; };
+		B87FECED1A364E4F003C5F0E /* http_router.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = http_router.h; sourceTree = "<group>"; };
+		B87FECEE1A366DCD003C5F0E /* constants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = constants.cpp; sourceTree = "<group>"; };
+		B87FECEF1A366DCD003C5F0E /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		B8B5F5B01A2E43F300A7666F /* js_page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = js_page.cpp; sourceTree = "<group>"; };
 		B8B5F5B11A2E43F300A7666F /* js_page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = js_page.h; sourceTree = "<group>"; };
 		B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_processor.cpp; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 				B8DE1CC21A251F930005E385 /* http_response.h */,
 				B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */,
 				B8780E9F1A2CBCC500F47CC4 /* http_request.h */,
+				B87FECED1A364E4F003C5F0E /* http_router.h */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -144,6 +149,8 @@
 				B824A0EE1A23B8AC00D406BE /* echo_processor.h */,
 				B83D2FB01A2CE18D001CFA7A /* server_variables.cpp */,
 				B83D2FB11A2CE18D001CFA7A /* server_variables.h */,
+				B87FECEE1A366DCD003C5F0E /* constants.cpp */,
+				B87FECEF1A366DCD003C5F0E /* constants.h */,
 			);
 			path = EmbeddedWebserver;
 			sourceTree = "<group>";
@@ -211,6 +218,7 @@
 				B824A0EB1A23AE7600D406BE /* connection_queue.cpp in Sources */,
 				B83D2FAC1A2CDDFA001CFA7A /* css_page.cpp in Sources */,
 				B861C75019DC515700056CD1 /* main.cpp in Sources */,
+				B87FECF01A366DCD003C5F0E /* constants.cpp in Sources */,
 				B8B5F5B21A2E43F300A7666F /* js_page.cpp in Sources */,
 				B83D2FB21A2CE18D001CFA7A /* server_variables.cpp in Sources */,
 				B8208F3319F9B66C00995DB7 /* connection.cpp in Sources */,

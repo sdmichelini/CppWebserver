@@ -33,3 +33,10 @@ std::string server_variables::get_value(std::string name){
 bool server_variables::value_exists(std::string name){
     return get_value(name)!="";
 }
+
+void server_variables::delete_variable(std::string name){
+    m_lock.lock();
+    if(m_values.find(name)!=m_values.end()){
+        m_values.erase(m_values.find(name));
+    }
+}
