@@ -10,7 +10,7 @@ CSS files currently. Working on scripting HTML and live variables with server se
 <h3><strong>Features: </strong></h3>
 
 Routing is handled using C++ 11 lambda expressions. 
-```
+```C++
 config_route("/", [](http_request req, http_response res){
 		size_t extension_loc = req.get_path().find_last_of('.');
 		if(extension_loc != std::string::npos){
