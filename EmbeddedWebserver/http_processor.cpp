@@ -44,7 +44,13 @@ http_processor::http_processor(){
             else if((vNamePos != std::string::npos)&&(vValuePos != std::string::npos)&&(ampPos != std::string::npos)){
                 std::string name = req.get_body().substr(vNamePos + 6, ampPos-vNamePos-6);
                 std::string value = req.get_body().substr(vValuePos + 7);
-                server_variables::get_instance().add_variable(name, value);
+                if(name==""||value==""){
+                    error = (name=="")?"<strong>Warning:</strong> Name Must be Non-Blank":"<strong>Warning:</strong> Value Must be Non-Blank";
+                }
+                else{
+                    server_variables::get_instance().add_variable(name, value);
+                }
+                
             }
             else{
                 error = "<strong>Warning:</strong> Invalid HTTP Post Request";
@@ -64,7 +70,7 @@ http_processor::http_processor(){
             for(it_type i = constants.begin(); i != constants.end(); i++)
             {
                 res2.add_body("<tr>");
-                res2.add_body("<td>"+i->first+"</td><td>"+i->second+"</td><td width='5%'><a href='' class='btn btn-danger'><span text-align='right' class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></td>");
+                res2.add_body("<td>"+i->first+"</td><td>"+i->second+"</td><td width='5%'><button class='btn btn-danger' onClick=\"deleteVariable('"+i->first+"',location.reload())\"><span text-align='right' class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>");
                 res2.add_body("</tr>");
             }
             res2.add_body("</table>");
@@ -88,6 +94,29 @@ http_processor::http_processor(){
         res.body = "<html><head><title>Server Sent Events</title></head><body>This is where server sent events should be.</body></html>";
     });
     config_route(CONSTANT_URL, [](http_request req, http_response &res){
+        std::string error = "";
+        if(req.get_method()==kPost){
+            size_t vNamePos = req.get_body().find("vName=");
+            size_t vValuePos = req.get_body().find("vValue=");
+            size_t ampPos = req.get_body().find('&');
+            if(req.get_body().find('+')!=std::string::npos){
+                error = "<strong>Warning:</strong> There can be no space in the request";
+            }
+            else if((vNamePos != std::string::npos)&&(vValuePos != std::string::npos)&&(ampPos != std::string::npos)){
+                std::string name = req.get_body().substr(vNamePos + 6, ampPos-vNamePos-6);
+                std::string value = req.get_body().substr(vValuePos + 7);
+                if(name==""||value==""){
+                    error = (name=="")?"<strong>Warning:</strong> Name Must be Non-Blank":"<strong>Warning:</strong> Value Must be Non-Blank";
+                }
+                else{
+                    constant::get_instance().add_constant(name, value);
+                }
+                
+            }
+            else{
+                error = "<strong>Warning:</strong> Invalid HTTP Post Request";
+            }
+        }
         custom_html res2 = custom_html("Constants");
         std::map<std::string, std::string> constants = constant::get_instance().get_values();
         typedef std::map<std::string, std::string>::iterator it_type;
@@ -96,14 +125,23 @@ http_processor::http_processor(){
         res2.add_body("<div class='main_content'>");
         res2.add_body("<h1>Constants</h1>");
         res2.add_body("</div>");
-        res2.add_body("<table class ='table table-striped'>");
-        for(it_type i = constants.begin(); i != constants.end(); i++)
-        {
-            res2.add_body("<tr>");
-            res2.add_body("<td>"+i->first+"</td><td>"+i->second+"</td>");
-            res2.add_body("</tr>");
+        if(constants.size()!=0){
+            res2.add_body("<table class ='table table-striped'>");
+            res2.add_body("<tr><th>Name</th><th>Value</th><th>Delete</th></tr>");
+            for(it_type i = constants.begin(); i != constants.end(); i++)
+            {
+                res2.add_body("<tr>");
+                res2.add_body("<td>"+i->first+"</td><td>"+i->second+"</td><td width='5%'><button class='btn btn-danger' onClick=\"deleteConstant('"+i->first+"',location.reload())\"><span text-align='right' class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>");
+                res2.add_body("</tr>");
+            }
+            res2.add_body("</table>");
         }
-        res2.add_body("</table>");
+        else{
+            res2.add_div("alert alert-info", "You have no constants");
+        }
+        if(error != ""){
+            res2.add_div("alert alert-warning", error);
+        }
         res2.add_body("<div class='main_content'>");
         res2.render_template("constant_footer");
         res2.add_body("</div>");
@@ -130,6 +168,7 @@ http_processor::http_processor(){
             res.set_header("Location", "/var/");
         }
         else if(req.get_method() == kDelete){
+            std::cout<<"Delete: "<<var<<std::endl;
             res.set_header("Content-Type", "text/json");
             if(vars.find(var) == vars.end()){
                 res.set_status(404);
@@ -137,10 +176,55 @@ http_processor::http_processor(){
             }
             else{
                 res.set_status(200);
-                
+                server_variables::get_instance().delete_variable(var);
                 res.body = "{'"+var+"':'deleted'}";
             }
         }
+    });
+    config_route(CONSTANT_REST, [](http_request req, http_response &res){
+        std::string var = req.get_path().substr(req.get_path().find_last_of('/')+1);
+        std::map<std::string, std::string> vars = constant::get_instance().get_values();
+        if(req.get_method() == kGet){
+            res.set_header("Content-Type", "text/json");
+            if(vars.find(var) == vars.end()){
+                res.set_status(404);
+                res.body = "{'Error':'Not Found'}";
+            }
+            else{
+                res.set_status(200);
+                res.body = "{'"+var+"':'"+vars[var]+"'}";
+            }
+        }
+        else if(req.get_method() == kPost){
+            res.set_status(301);
+            res.set_header("Location", "/var/");
+        }
+        else if(req.get_method() == kDelete){
+            std::cout<<"Delete: "<<var<<std::endl;
+            res.set_header("Content-Type", "text/json");
+            if(vars.find(var) == vars.end()){
+                res.set_status(404);
+                res.body = "{'Error':'Not Found'}";
+            }
+            else{
+                res.set_status(200);
+                constant::get_instance().delete_variable(var);
+                res.body = "{'"+var+"':'deleted'}";
+            }
+        }
+    });
+    
+    config_route(LOG_URL, [](http_request req, http_response &res){
+        custom_html res2 = custom_html("Logs");
+        res2.add_body("<div class='main_content'>");
+        res2.add_body("<div class='container'>");
+        res2.add_body("<h1>Log Messages</h1>");
+        res2.add_body(logger::get_instance().generate_html());
+        res2.render_template("log_template");
+        res2.add_body("</div>");
+        res2.add_body("</div>");
+        res2.to_html();
+        res = res2;
     });
 }
 

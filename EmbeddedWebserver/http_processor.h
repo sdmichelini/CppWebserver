@@ -14,6 +14,7 @@
 #include "http_router.h"
 #include "constants.h"
 #include "server_variables.h"
+#include "logger.h"
 
 #define MAX_PACKET_SIZE 1024
 
@@ -25,8 +26,10 @@ public:
 private:
     const std::string VARIABLE_URL = "var/";
     const std::string VARIABLE_REST = "var/:";
+    const std::string CONSTANT_REST = "const/:";
     const std::string SSE_URL = "sse/";
     const std::string CONSTANT_URL = "const/";
+    const std::string LOG_URL ="log/";
     
     std::map<std::string, http_router> m_routes;
 };

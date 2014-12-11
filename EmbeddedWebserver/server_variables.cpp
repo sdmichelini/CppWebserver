@@ -39,4 +39,5 @@ void server_variables::delete_variable(std::string name){
     if(m_values.find(name)!=m_values.end()){
         m_values.erase(m_values.find(name));
     }
+    m_lock.unlock();
 }

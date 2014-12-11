@@ -33,3 +33,11 @@ std::string constant::get_value(std::string name){
 bool constant::value_exists(std::string name){
     return get_value(name)!="";
 }
+
+void constant::delete_variable(std::string name){
+    m_lock.lock();
+    if(m_values.find(name)!=m_values.end()){
+        m_values.erase(m_values.find(name));
+    }
+    m_lock.unlock();
+}

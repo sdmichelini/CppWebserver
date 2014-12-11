@@ -55,6 +55,10 @@ void connection_queue::process_clients(){
             m_clients.pop_front();
             delete conn;
             m_lock.unlock();
+        }else{
+            //m_lock.lock();
+            
+            //m_lock.unlock();
         }
     }
 }

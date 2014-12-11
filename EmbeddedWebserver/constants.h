@@ -20,6 +20,7 @@ public:
         return s;
     }
     void add_constant(std::string name, std::string value);
+    void delete_variable(std::string name);
     void add_float(std::string name, float value);
     std::string get_value(std::string name);
     bool value_exists(std::string name);
