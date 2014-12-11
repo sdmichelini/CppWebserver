@@ -20,6 +20,7 @@
 		B8780EA01A2CBCC500F47CC4 /* http_request.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8780E9E1A2CBCC500F47CC4 /* http_request.cpp */; };
 		B87FECF01A366DCD003C5F0E /* constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87FECEE1A366DCD003C5F0E /* constants.cpp */; };
 		B8B5F5B21A2E43F300A7666F /* js_page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B5F5B01A2E43F300A7666F /* js_page.cpp */; };
+		B8BF50301A39EC33007DC486 /* server_sent_events.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8BF502E1A39EC33007DC486 /* server_sent_events.cpp */; };
 		B8D6414A1A379DA800CB02EF /* json.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D641481A379DA800CB02EF /* json.cpp */; };
 		B8DE1CC01A251B8B0005E385 /* http_processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */; };
 		B8DE1CC31A251F930005E385 /* http_response.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8DE1CC11A251F930005E385 /* http_response.cpp */; };
@@ -66,6 +67,8 @@
 		B87FECEF1A366DCD003C5F0E /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		B8B5F5B01A2E43F300A7666F /* js_page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = js_page.cpp; sourceTree = "<group>"; };
 		B8B5F5B11A2E43F300A7666F /* js_page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = js_page.h; sourceTree = "<group>"; };
+		B8BF502E1A39EC33007DC486 /* server_sent_events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = server_sent_events.cpp; sourceTree = "<group>"; };
+		B8BF502F1A39EC33007DC486 /* server_sent_events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server_sent_events.h; sourceTree = "<group>"; };
 		B8D641481A379DA800CB02EF /* json.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json.cpp; sourceTree = "<group>"; };
 		B8D641491A379DA800CB02EF /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
 		B8DE1CBE1A251B8A0005E385 /* http_processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_processor.cpp; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				B87FECEF1A366DCD003C5F0E /* constants.h */,
 				B80248F71A36B35300B8A315 /* logger.cpp */,
 				B80248F81A36B35300B8A315 /* logger.h */,
+				B8BF502E1A39EC33007DC486 /* server_sent_events.cpp */,
+				B8BF502F1A39EC33007DC486 /* server_sent_events.h */,
 			);
 			path = EmbeddedWebserver;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				B80248F91A36B35300B8A315 /* logger.cpp in Sources */,
 				B824A0EF1A23B8AC00D406BE /* echo_processor.cpp in Sources */,
 				B83D2FA91A2CD71B001CFA7A /* html_page.cpp in Sources */,
+				B8BF50301A39EC33007DC486 /* server_sent_events.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
