@@ -70,7 +70,7 @@ http_processor::http_processor(){
             for(it_type i = constants.begin(); i != constants.end(); i++)
             {
                 res2.add_body("<tr>");
-                res2.add_body("<td>"+i->first+"</td><td>"+i->second+"</td><td width='5%'><button class='btn btn-danger' onClick=\"deleteVariable('"+i->first+"',location.reload())\"><span text-align='right' class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>");
+                res2.add_body("<td>"+i->first+"</td><td id='var_"+i->first+"'>"+i->second+"</td><td width='5%'><button class='btn btn-danger' onClick=\"deleteVariable('"+i->first+"',location.reload())\"><span text-align='right' class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td>");
                 res2.add_body("</tr>");
             }
             res2.add_body("</table>");
@@ -85,13 +85,20 @@ http_processor::http_processor(){
         res2.render_template("variable_footer");
         res2.add_body("</div>");
         res2.add_body("</div>");
+        res2.add_js("refresh_variable.js");
         res2.to_html();
         res = res2;
 
     });
-    config_route(SSE_URL, [](http_request req, http_response &res){
+    config_route(ALL_VARIABLE_URL, [](http_request req, http_response &res){
+        json::json_data data = server_variables::get_instance().get_values();
+        if(data.size() == 0){
+            res.set_status(404);
+            return;
+        }
         res.set_status(200);
-        res.body = "<html><head><title>Server Sent Events</title></head><body>This is where server sent events should be.</body></html>";
+        res.set_header("Content-Type", "text/json");
+        res.body = json::map_to_json(data);
     });
     config_route(CONSTANT_URL, [](http_request req, http_response &res){
         std::string error = "";
@@ -245,7 +252,7 @@ void http_processor::process_client(connection *conn){
         }
         
         http_response r;
-        
+        //This is where all the routing is done
         size_t pos = req.get_path().find_last_of('/');
         if(pos==std::string::npos){
             size_t extension_loc = req.get_path().find_last_of('.');
@@ -261,6 +268,10 @@ void http_processor::process_client(connection *conn){
                 else{
                     r = html_page(req.get_path());
                 }
+            }
+            else if(m_routes.find(req.get_path())!=m_routes.end())
+            {
+                m_routes[req.get_path()](req,r);
             }
             else r = html_page("index.html");
         }

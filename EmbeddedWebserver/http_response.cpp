@@ -38,6 +38,21 @@ std::string http_response::to_string(){
     return ret;
 }
 
+std::string http_response::writeEventStream(){
+    set_header("Connection", "keep-alive");
+    set_header("Content-Type", "text/event-stream");
+    //Make HTTP response
+    //Status Line
+    std::string ret = "HTTP/1.1 "+std::to_string(m_status)+" "+get_status_message(m_status)+"\r\n";
+    for(unsigned int i = 0; i < m_headers.size();i++)
+    {
+        ret += m_headers[i].name+":"+m_headers[i].value+"\r\n";
+    }
+    ret += "\r\n";
+    ret +=body;
+    return ret;
+}
+
 std::string http_response::get_status_message(int status){
     if(status == 200){
         return "OK";

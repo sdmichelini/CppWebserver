@@ -49,6 +49,10 @@ void custom_html::render_template(std::string templateName){
     file.close();
 }
 
+void custom_html::add_js(std::string js_path){
+    m_js += "<script src='"+js_path+"'></script>";
+}
+
 void custom_html::to_html(){
     //Bootstrap
     add_css("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css");
@@ -63,6 +67,7 @@ void custom_html::to_html(){
     body += "<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>";
     body += "<script src='/main.js'></script>";
     body += "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>";
+    body += m_js;
     body += "</body>\n";
     body += "</html>\n";
 }

@@ -28,8 +28,11 @@ int main(int argc, const char * argv[]) {
     }
     logger::get_instance().log("Server Started.");
     logger::get_instance().log("Test Error",kHigh);
+    unsigned long count = 0;
     while(1){
-        usleep(5000);
+        if(count % 100 == 0)server_variables::get_instance().add_variable("test", std::to_string(rand()%60));
+        count++;
+        usleep(500);
     }
     return 0;
 }

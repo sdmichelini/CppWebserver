@@ -20,11 +20,13 @@ public:
     void add_div(std::string div_class, std::string content);
     void add_body(std::string bodyLine);
     void render_template(std::string templateName);
+    void add_js(std::string js_path);
     void to_html();
 private:
     std::string m_title;
     std::string m_head;
     std::string m_body;
+    std::string m_js;
     
 };
 
