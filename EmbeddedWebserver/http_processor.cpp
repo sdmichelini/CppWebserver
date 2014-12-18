@@ -56,14 +56,21 @@ http_processor::http_processor(){
                 error = "<strong>Warning:</strong> Invalid HTTP Post Request";
             }
         }
+        //Init Custom HTML
         custom_html res2 = custom_html("Variables");
+        //Get the Current Constants
         std::map<std::string, std::string> constants = server_variables::get_instance().get_values();
         typedef std::map<std::string, std::string>::iterator it_type;
+        //We are going to send back a successful request
         res2.set_status(200);
+        //Boostrap Container
         res2.add_body("<div class='container'>");
+        //Use CSS main_content
         res2.add_body("<div class='main_content'>");
+        //Heading
         res2.add_body("<h1>Variables</h1>");
         res2.add_body("</div>");
+        //Make a table of the constants
         if(constants.size()!=0){
             res2.add_body("<table class ='table table-striped'>");
             res2.add_body("<tr><th>Name</th><th>Value</th><th>Delete</th></tr>");
@@ -75,17 +82,22 @@ http_processor::http_processor(){
             }
             res2.add_body("</table>");
         }
+        //Error with Alert if we have none
         else{
             res2.add_div("alert alert-info", "You have no variables");
         }
+        //Print error if we have one
         if(error != ""){
             res2.add_div("alert alert-warning", error);
         }
         res2.add_body("<div class='main_content'>");
+        //Render a template
         res2.render_template("variable_footer");
         res2.add_body("</div>");
         res2.add_body("</div>");
+        //Link a JS file
         res2.add_js("refresh_variable.js");
+        //Generate HTML
         res2.to_html();
         res = res2;
 
@@ -241,7 +253,7 @@ void http_processor::config_route(std::string path, http_router r){
 
 void http_processor::process_client(connection *conn){
     std::string request = conn->recieve_string();
-    
+    std::cout<<"recieved request"<<std::endl;
     if(request.size()==0){
        //do nothing except close connection
     }

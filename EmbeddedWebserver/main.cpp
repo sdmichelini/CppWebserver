@@ -17,7 +17,7 @@ server * s;
 
 int main(int argc, const char * argv[]) {
     
-    s = new server(10000);
+    s = new server(10001);
     logger::get_instance().log("Server Init.");
     constant::get_instance().add_constant("MyConstant", "TestValue");
     constant::get_instance().add_constant("MyConstant1", "TestValue");
@@ -26,6 +26,7 @@ int main(int argc, const char * argv[]) {
         std::cout<<"error"<<std::endl;
         return 1;
     }
+    std::cout<<"Server Started."<<std::endl;
     logger::get_instance().log("Server Started.");
     logger::get_instance().log("Test Error",kHigh);
     unsigned long count = 0;
